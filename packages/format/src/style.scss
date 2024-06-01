@@ -1,0 +1,136 @@
+// 在支持hover的设备上，才会应用hover样式
+@mixin hover {
+  @media (any-hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+.json-view {
+  --tab-size: 2em;
+  --bracket-size: 14px;
+  --base-font-size: 14px;
+  --base-line-height: 23px;
+  --alignment-dotted-line-width: 1px;
+  --alignment-dotted-line-color: #ddd;
+  --base-font-color: #080808;
+  --key-text-color: #7b258f;
+  --string-value-color: #377a29;
+  --link-text-color: #377a29;
+  --null-value-color: #0839ac;
+  --number-value-color: #2156e2;
+  --boolean-value-color: #d64242;
+  --bracket-color: #080808;
+  --line-highlight-background: #f5f8fd;
+  --bracket-highlight-background: #a2d7d8;
+  --control-highlight-background: #f5f8fd;
+  --link-highlight-color: #0839ac;
+
+  font-size: var(--base-font-size);
+  color: var(--base-font-color);
+  font-family: "Source Code Pro", "Droid-Sans-Mono", "consolas", monospace;
+  line-height: var(--base-line-height);
+  padding-left: var(--tab-size);
+
+  .line {
+    @include hover {
+      font-weight: 500;
+      background: var(--line-highlight-background);
+    }
+  }
+
+  .array-box, .object-box {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: var(--alignment-dotted-line-width);
+      height: calc(100% - 2 * var(--base-line-height));
+      background-image: linear-gradient(to bottom, transparent 30%, var(--alignment-dotted-line-color) 70%, var(--alignment-dotted-line-color)); /* 创建垂直的虚线 */
+      background-size: 1px 5px;
+      left: calc(var(--base-font-size) / 4);
+      top: var(--base-line-height);
+    }
+
+    .control-button {
+      width: 1.5em;
+      height: 1.5em;
+      position: absolute;
+      top: calc(var(--base-line-height) / 2);
+      left: 0;
+      transform: translateX(-100%) translateY(-50%);
+
+      @include hover {
+        background: var(--control-highlight-background);
+      }
+    }
+
+    &.hover {
+      & > .start-line, & > .end-line {
+        font-weight: 500;
+        background: var(--line-highlight-background);
+        .bracket {
+          background: var(--bracket-highlight-background);
+        }
+      }
+
+      & > .control-button {
+        background: var(--control-highlight-background);
+      }
+    }
+  }
+
+  .array-content {
+
+  }
+
+  .object-content {
+
+  }
+
+  .array-content, .object-content {
+    padding-left: var(--tab-size);
+  }
+
+  // '['、']'、'}'、'{' 样式
+  .bracket {
+    color: var(--bracket-color);
+    font-size: var(--bracket-size);
+  }
+
+  .boolean-value {
+    color: var(--boolean-value-color);
+  }
+
+  .null-value {
+    color: var(--null-value-color);
+  }
+
+  .number-value {
+    color: var(--number-value-color);
+  }
+
+  .string-value {
+    color: var(--string-value-color);
+  }
+
+  .link {
+    color: var(--link-text-color);
+
+    @include hover {
+      color: var(--link-highlight-color);
+    }
+  }
+
+  .key-text {
+    color: var(--key-text-color);
+  }
+
+  .comma {
+
+  }
+}
+
+@import "./themes/jb.scss";

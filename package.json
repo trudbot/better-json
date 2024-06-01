@@ -1,0 +1,12 @@
+{
+  "name": "better-json",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["json", "utils"],
+  "author": "trudbot",
+  "license": "MIT"
+}
