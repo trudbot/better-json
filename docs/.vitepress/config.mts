@@ -7,7 +7,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: 'https://trudbot-pic.oss-cn-hangzhou.aliyuncs.com/trubdot/1FCEBC130F5CD4909174FFACCD09B5B5.webp' }]
   ],
-  base: '/repo/',
+  base: '/better-json/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: 'https://trudbot-pic.oss-cn-hangzhou.aliyuncs.com/trubdot/1FCEBC130F5CD4909174FFACCD09B5B5.webp',
