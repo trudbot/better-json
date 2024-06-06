@@ -3,6 +3,7 @@ import FoldableBox from "../Base/foldable-box.vue";
 import {computed} from "vue";
 import TreeNode from "../TreeNode.vue";
 import {JSONObject, JSONValue} from "../../types/json.ts";
+import {writeToClipboard} from "../../utils/clipboard.ts";
 const props = defineProps<{
   value: JSONObject;
   keyText: string;
@@ -13,6 +14,11 @@ const childList = computed(() => {
   const childList = Object.entries(props.value);
   return childList;
 });
+
+function copy() {
+  const copyContent = props.keyText.length ? {[props.keyText]: props.value} : props.value;
+  writeToClipboard(copyContent);
+}
 </script>
 
 <template>
@@ -22,6 +28,7 @@ const childList = computed(() => {
     :is-array="false"
     :key-text="keyText"
     :level="level"
+    @copy="copy"
   >
     <TreeNode
       v-for="entry in childList"

@@ -5,8 +5,9 @@ import FoldedObject from "./Value/folded-object.vue";
 import ControlButton from "./control-button.vue";
 import { ref, inject } from 'vue';
 import {configKey} from "../../types/config-inject.ts";
+import ExtraFunctionButton from "./extra-function-button.vue";
 
-defineProps<{
+const props = defineProps<{
   isArray: boolean;
   isObject: boolean;
   keyText?: string;
@@ -14,9 +15,12 @@ defineProps<{
   level: number;
 }>();
 
-const fold = ref(false);
+const emit = defineEmits(['copy']);
+
+const fold = ref<boolean>(props.length === 0);
 const root = inject(configKey)?.ROOT_LEVEL || 0;
 const hover = ref(false);
+
 function toggleFold() {
   fold.value = !fold.value;
 }
@@ -28,6 +32,17 @@ function enter() {
 function leave() {
   hover.value = false;
 }
+
+const funtions = [
+  {
+    desc: '复制',
+    descEn: 'Copy',
+    tip: '已复制!',
+    callback: () => {
+      emit('copy');
+    },
+  }
+]
 
 </script>
 
@@ -48,14 +63,17 @@ function leave() {
       @click="toggleFold"
     >
       <template #value>
-        <template v-if="fold">
-          <FoldedArray v-if="isArray" :length="length"/>
-          <FoldedObject v-else :length="length"/>
-        </template>
-        <template v-else>
-          <span v-if="isArray" class="bracket">[</span>
-          <span v-else-if="isObject" class="bracket">{</span>
-        </template>
+        <span class="fold-box-header-line">
+          <template v-if="fold">
+            <FoldedArray v-if="isArray" :length="length"/>
+            <FoldedObject v-else :length="length"/>
+          </template>
+          <template v-else>
+            <span v-if="isArray" class="bracket">[</span>
+            <span v-else-if="isObject" class="bracket">{</span>
+          </template>
+          <ExtraFunctionButton :functions="funtions" v-show="hover"/>
+        </span>
       </template>
     </FieldBox>
     <div
@@ -79,7 +97,7 @@ function leave() {
         <span v-else-if="isObject" class="bracket">}</span>
       </template>
     </FieldBox>
-    // 控制展开收起的按钮
+    <!--控制展开收起的按钮-->
     <ControlButton
       :fold="fold"
       @click="toggleFold"

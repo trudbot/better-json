@@ -13,7 +13,8 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./style": "./dist/style.css"
   },
   "dependencies": {
     "vite-plugin-dts": "^3.9.1",

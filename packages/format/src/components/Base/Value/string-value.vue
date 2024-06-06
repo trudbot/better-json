@@ -5,7 +5,9 @@
         <a
           v-if="item.type === 'url'"
           class="link"
-          :href="item.value">
+          :href="item.value"
+          target="_blank"
+        >
           {{item.value}}
         </a>
         <span v-else>{{encode(item.value)}}</span>

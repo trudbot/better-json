@@ -16,6 +16,7 @@
   --alignment-dotted-line-color: #ddd;
   --base-font-color: #080808;
   --key-text-color: #7b258f;
+  --tip-text-color: #45a930;
   --string-value-color: #377a29;
   --link-text-color: #377a29;
   --null-value-color: #0839ac;
@@ -114,6 +115,7 @@
 
   .string-value {
     color: var(--string-value-color);
+    white-space: nowrap;
   }
 
   .link {
@@ -130,6 +132,33 @@
 
   .comma {
 
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+  }
+
+  .fold-box-header-line {
+    position: relative;
+
+    .function-set {
+      position: absolute;
+      display: inline-flex;
+      gap: 1em;
+      left: calc(100% + 1.5em);
+      white-space: nowrap;
+
+      .function-button {
+        display: inline;
+      }
+
+      .tip-text {
+        color: var(--tip-text-color);
+        font-weight: 500;
+        font-family: Arial;
+      }
+    }
   }
 }
 
