@@ -20,6 +20,7 @@ const emit = defineEmits(['copy']);
 const fold = ref<boolean>(props.length === 0);
 const root = inject(configKey)?.ROOT_LEVEL || 0;
 const hover = ref(false);
+const showButton = ref(false);
 
 function toggleFold() {
   fold.value = !fold.value;
@@ -31,6 +32,14 @@ function enter() {
 
 function leave() {
   hover.value = false;
+}
+
+function rightClick(e: Event) {
+  e.preventDefault();
+  showButton.value = true;
+  setTimeout(() => {
+    showButton.value = false;
+  }, 5000);
 }
 
 const funtions = [
@@ -61,6 +70,7 @@ const funtions = [
       @mouseenter="enter"
       @mouseleave="leave"
       @click="toggleFold"
+      @contextmenu.prevent.stop="rightClick"
     >
       <template #value>
         <span class="fold-box-header-line">
@@ -72,7 +82,7 @@ const funtions = [
             <span v-if="isArray" class="bracket">[</span>
             <span v-else-if="isObject" class="bracket">{</span>
           </template>
-          <ExtraFunctionButton :functions="funtions" v-show="hover"/>
+          <ExtraFunctionButton :functions="funtions" v-show="showButton"/>
         </span>
       </template>
     </FieldBox>

@@ -1,0 +1,28 @@
+{
+  "name": "auto-format",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "cross-env NODE_ENV=production pnpm build:content && pnpm build:background && pnpm copy:manifest",
+    "preview": "vite preview",
+    "build:content": "vite build --config vite.config.content.ts",
+    "build:background": "vite build --config vite.config.background.ts",
+    "copy:manifest": "cp src/manifest.json extension/manifest.json"
+  },
+  "devDependencies": {
+    "vue": "^3.4.21",
+    "@types/node": "^20.14.2",
+    "@types/webextension-polyfill": "^0.10.7",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "cross-env": "^7.0.3",
+    "rollup-plugin-copy": "^3.5.0",
+    "sass": "^1.77.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6",
+    "webextension-polyfill": "^0.12.0",
+    "@trudbot/format": "workspace:*"
+  }
+}

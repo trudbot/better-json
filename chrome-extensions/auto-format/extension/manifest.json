@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Json Format by trudbot",
+  "version": "0.0.1",
+  "description": "自动格式化json",
+  "icons": {
+  },
+  "background": {
+    "service_worker": "dist/background/index.js"
+  },
+  "permissions": [
+  ],
+  "host_permissions": [],
+  "content_scripts": [
+    {
+      "js": [
+        "dist/content-scripts/index.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["dist/content-scripts/style.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
