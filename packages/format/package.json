@@ -1,5 +1,5 @@
 {
-  "name": "@trudbot/format",
+  "name": "@trudbot/json-format",
   "version": "0.0.2",
   "type": "module",
   "scripts": {
@@ -19,6 +19,10 @@
   "files": [
     "dist/*"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.77.4",
