@@ -1,6 +1,6 @@
 {
   "name": "@trudbot/format",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,15 +16,19 @@
     },
     "./style": "./dist/style.css"
   },
-  "dependencies": {
-    "vite-plugin-dts": "^3.9.1",
-    "vue": "^3.4.21"
-  },
+  "files": [
+    "dist/*"
+  ],
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.77.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^2.0.6",
+    "vite-plugin-dts": "^3.9.1",
+    "vue": "^3.4.21"
+  },
+  "peerDependencies": {
+    "vue": "3.x"
   }
 }

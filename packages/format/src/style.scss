@@ -55,6 +55,12 @@
       top: var(--base-line-height);
     }
 
+    &.hover::before {
+      background-image: none;
+      background-color: var(--alignment-dotted-line-color);
+      filter: brightness(0.9);
+    }
+
     .control-button {
       width: 1.5em;
       height: 1.5em;

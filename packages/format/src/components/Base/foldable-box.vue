@@ -6,6 +6,7 @@ import ControlButton from "./control-button.vue";
 import { ref, inject } from 'vue';
 import {configKey} from "../../types/config-inject.ts";
 import ExtraFunctionButton from "./extra-function-button.vue";
+import { subscribe, unsubscribe, mousein, mouseout } from '../../utils/hoverEmitter.ts';
 
 const props = defineProps<{
   isArray: boolean;
@@ -26,12 +27,18 @@ function toggleFold() {
   fold.value = !fold.value;
 }
 
+function hoverLevelChange(level: number | null) {
+  hover.value = level === props.level;
+}
+
 function enter() {
-  hover.value = true;
+  subscribe(hoverLevelChange);
+  mousein(props.level);
 }
 
 function leave() {
-  hover.value = false;
+  mouseout(props.level);
+  unsubscribe(hoverLevelChange);
 }
 
 function rightClick(e: Event) {
@@ -63,12 +70,12 @@ const funtions = [
       'folded': fold,
       'hover': hover,
     }"
+    @mouseenter.stop="enter"
+    @mouseleave.stop="leave"
   >
     <FieldBox
       class="start-line"
       :keyText="keyText"
-      @mouseenter="enter"
-      @mouseleave="leave"
       @click="toggleFold"
       @contextmenu.prevent.stop="rightClick"
     >
@@ -99,8 +106,6 @@ const funtions = [
       v-show="!fold"
       class="end-line"
       :need-end-comma="root !== level"
-      @mouseenter="enter"
-      @mouseleave="leave"
     >
       <template #value>
         <span v-if="isArray" class="bracket">]</span>
