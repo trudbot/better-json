@@ -33,6 +33,7 @@
   font-family: "Source Code Pro", "Droid-Sans-Mono", "consolas", monospace;
   line-height: var(--base-line-height);
   padding-left: var(--tab-size);
+  transform: translate(0, 0, 0);
 
   .line {
     @include hover {
@@ -81,10 +82,6 @@
         .bracket {
           background: var(--bracket-highlight-background);
         }
-      }
-
-      & > .control-button {
-        background: var(--control-highlight-background);
       }
     }
   }
