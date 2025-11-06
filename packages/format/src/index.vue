@@ -1,22 +1,26 @@
 <script setup lang="ts">
-import {computed, provide} from 'vue';
+import {ref, provide, watch} from 'vue';
 import TreeNode from "./components/TreeNode.vue";
-import {JSONValue} from "./types/json.ts";
 import {config} from './config.ts'
 import {configKey} from "./types/config-inject.ts";
 
 const props = defineProps(['value']);
+const json = ref("");
 provide(configKey, config);
 
-const json = computed<JSONValue>(() => {
+watch(() => props.value, () => {
   try {
     if (typeof props.value === 'string') {
-      return JSON.parse(props.value);
+      json.value = JSON.parse(props.value);
+    } else {
+      json.value = JSON.parse(JSON.stringify(props.value));
     }
-    return JSON.parse(JSON.stringify(props.value));
   } catch (e) {
-    console.log('json 解析 error', e);
+    console.error('json 解析 error', e);
+    json.value = (e as any)?.msg || 'json 解析 error';
   }
+}, {
+  immediate: true,
 });
 </script>
 

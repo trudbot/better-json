@@ -23,7 +23,7 @@ function copy() {
 
 <template>
   <FoldableBox
-    is-object
+    :is-object="true"
     :length="childList.length"
     :is-array="false"
     :key-text="keyText"

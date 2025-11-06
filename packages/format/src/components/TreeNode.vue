@@ -7,6 +7,7 @@ import StringNode from "./NodeType/string-node.vue";
 import NullNode from "./NodeType/null-node.vue";
 import {JSON_TYPE_ENUM, JSONValue} from "../types/json.ts";
 import {getType} from "../utils/getType.ts";
+import { computed } from "vue";
 
 const props = defineProps<{
   keyText?: string;
@@ -14,7 +15,9 @@ const props = defineProps<{
   level: number;
 }>();
 
-const type = getType(props.value);
+const type = computed(() => {
+  return getType(props.value);
+});
 
 const Node = {
   [JSON_TYPE_ENUM.NUMBER]: NumberNode,
