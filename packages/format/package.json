@@ -10,6 +10,7 @@
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://trudbot.cn/better-json/",
   "exports": {
     ".": {
       "import": "./dist/index.js",
